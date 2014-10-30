@@ -8,7 +8,7 @@ namespace tut
     { 
     };
     
-    test_group<example_test_data> testsuite("example tester");
+    test_group<example_test_data> ExampleTestSuite("example tester");
     typedef test_group<example_test_data>::object testcase;
 
     template<> 

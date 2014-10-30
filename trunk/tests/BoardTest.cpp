@@ -2,13 +2,13 @@
 
 #include "board.h"
 
-namespace tut 
-{ 
+namespace tut
+{
     struct board_test_data // initialized before each test
     {
     };
 
-    test_group<board_test_data> testsuite("Board() tester");
+    test_group<board_test_data> BoardTestSuite("Board() tester");
     typedef test_group<board_test_data>::object testcase;
 
     template<> 
