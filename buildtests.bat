@@ -5,7 +5,7 @@ rmdir /s /q debug
 rmdir /s /q release
 
 rem ----------
-set PATH=C:\Qt\Tools\MinGW\bin\;%BASEPATH%
+set PATH=C:\Qt\Tools\mingw482_32\bin\;%BASEPATH%
 
 C:\Qt\5.3\mingw482_32\bin\qmake.exe -spec win32-g++ tests.pro
 mingw32-make.exe --always-make -f Makefile all

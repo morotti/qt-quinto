@@ -34,9 +34,29 @@ CONFIG(release, debug|release) {
 }
 
 #----------
+win32-msvc2012 {
+    COMPILER = msvc2012
+}
+
+win32-msvc2013 {
+    COMPILER = msvc2013
+}
+
+win32-g++ {
+    COMPILER = mingw
+}
+
+#----------
 win32 {
     IN_EXE = $${OUT_PWD}\\$${SUBDIR}\\$${TARGET}.exe
     IN_EXE ~= s,/,\\,g
 
-    QMAKE_POST_LINK += $${IN_EXE}
+    OUT_DIR = $${IN_PWD}\\bin\\win-$${QT_ARCH}-$${COMPILER}-$${SUBDIR}
+    OUT_EXE = $${OUT_DIR}\\$${TARGET}.exe
+    OUT_DIR ~= s,/,\\,g
+    OUT_EXE ~= s,/,\\,g
+
+    QMAKE_POST_LINK += (if not exist $${OUT_DIR} ( mkdir $${OUT_DIR} ))
+    QMAKE_POST_LINK += &&
+    QMAKE_POST_LINK += copy /Y $${IN_EXE} $${OUT_EXE}
 }
