@@ -26,12 +26,6 @@ QMAKE_CXXFLAGS += -openmp
 
 TARGET = quinto
 
-#BUILDDIR = $$PWD/build
-#OBJECTS_DIR = $${BUILDDIR}
-#MOC_DIR = $${BUILDDIR}
-#RCC_DIR = $${BUILDDIR}
-#UI_DIR = $${BUILDDIR}
-
 #----------
 CONFIG(release, debug|release) {
     SUBDIR = release
