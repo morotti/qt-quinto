@@ -65,14 +65,14 @@ void Gui::OnSolve(void)
 	long nSolution;
     nSolution = model->solve();
 	
-	double time = static_cast<long>(timer.elapsed()) / 1000.0;
+    double elapsed = static_cast<long>(timer.elapsed()) / 1000.0;
 
 	if(nSolution == -1)
-		statusBar()->showMessage(QString("No solution found in %1 ms").arg(time));
+        statusBar()->showMessage(QString("No solution found in %1 ms").arg(elapsed));
 	else if(nSolution < 17)
-		statusBar()->showMessage(QString("%1 solutions found in %2 ms").arg(pow(2.0f, nSolution)).arg(time));
+        statusBar()->showMessage(QString("%1 solutions found in %2 ms").arg(pow(2.0f, nSolution)).arg(elapsed));
 	else
-		statusBar()->showMessage(QString("2^%1 solutions found in %2 ms").arg(nSolution).arg(time));
+        statusBar()->showMessage(QString("2^%1 solutions found in %2 ms").arg(nSolution).arg(elapsed));
 	
     ui->buttonBox->setEnabled(true);
 }
@@ -87,6 +87,9 @@ void Gui::OnAi(void)
     if(model->solver.isSolved() == false)
         return;
 
+    QElapsedTimer timer;
+    timer.start();
+
     for( long y = 0 ; y < model->rowCount() ; y++)
     {
         for( long x = 0 ; x < model->columnCount() ; x++)
@@ -100,6 +103,9 @@ void Gui::OnAi(void)
             }
         }
     }
+
+    double elapsed = static_cast<long>(timer.elapsed()) / 1000.0;
+    statusBar()->showMessage(QString("Autoplay in %1 ms").arg(elapsed));
 
     ui->buttonBox->setEnabled(true);
 }
