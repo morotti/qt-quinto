@@ -16,18 +16,15 @@ public:
 private:
 	struct {long x; long y; } lastPoint;
 
-	QVariant blueBrush, whiteBrush, blackBrush;
-    QProgressBar *bar;
+    QVariant blueBrush, whiteBrush, blackBrush;
 
 public:
     BoardModel(QObject *parent);
-    QProgressBar *GetProgressBar(void) { return bar; };
 
     void click(long x, long y);
     void generate(long nSide, long nDensity);
     void retry(void);
     long solve(void);
-	void Ai(void);
 
     // inherited functions
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;

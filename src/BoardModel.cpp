@@ -3,10 +3,9 @@
 
 BoardModel::BoardModel(QObject *parent) : QAbstractTableModel(parent)
 {
-	blueBrush = QVariant(QColor(Qt::darkCyan));
-	whiteBrush = QVariant(QColor(Qt::white));
-	blackBrush = QVariant(QColor(Qt::black));
-	bar = new QProgressBar();
+    blueBrush = QVariant(QColor(Qt::darkCyan));
+    whiteBrush = QVariant(QColor(Qt::white));
+    blackBrush = QVariant(QColor(Qt::black));
 }
 
 int BoardModel::rowCount(const QModelIndex &) const
@@ -115,32 +114,4 @@ QVariant BoardModel::data(const QModelIndex &index, int role) const
 	//}
 
 	return QVariant();
-}
-
-void BoardModel::Ai(void)
-{
-	long nSolution = 1;
-
-	bar->reset();
-    bar->setMaximum(board.getSide() - 1);
-    if(solver.isSolved() == false)
-		nSolution = solve();
-
-	if(nSolution == 0)
-		return;
-
-    for( long y = 0 ; y < board.getSide() ; y++)
-	{
-        for( long x = 0 ; x < board.getSide() ; x++)
-		{
-            if(solver.get(x, y))
-			{
-				click(x, y);
-				qApp->processEvents();
-				//yieldCurrentThread();
-				//msleep(10);
-			}
-		}
-		bar->setValue(y);
-	}
 }

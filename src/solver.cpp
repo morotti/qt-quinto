@@ -215,6 +215,7 @@ size_t Solver::solve(Grid2D board)
 
         if(equations[xMatrix].test(xMatrix) == false) // && result == true
         {
+            solution.resize(0);
             return -1;
         }
 
