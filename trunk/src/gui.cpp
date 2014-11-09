@@ -14,10 +14,6 @@ Gui::Gui(QWidget *parent)
 
     ui->setupUi(this);
 
-    QProgressBar *bar = model->GetProgressBar();
-	statusBar()->addPermanentWidget(bar);
-	bar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->setModel(model);
@@ -85,7 +81,25 @@ void Gui::OnAi(void)
 {
     ui->buttonBox->setEnabled(false);
 
-    model->Ai();
+    if(model->solver.isSolved() == false)
+        this->OnSolve();
+
+    if(model->solver.isSolved() == false)
+        return;
+
+    for( long y = 0 ; y < model->rowCount() ; y++)
+    {
+        for( long x = 0 ; x < model->columnCount() ; x++)
+        {
+            if(model->solver.get(x, y))
+            {
+                OnClick(model->index(y, x));
+                qApp->processEvents();
+                //yieldCurrentThread();
+                //msleep(10);
+            }
+        }
+    }
 
     ui->buttonBox->setEnabled(true);
 }
