@@ -25,6 +25,7 @@ void BoardModel::generate(long nSide, long nDensity)
 
 	lastPoint.x = lastPoint.y = -1;
     board.generate(nSide, nDensity);
+    UpdateCounters();
 
     endResetModel();
 }

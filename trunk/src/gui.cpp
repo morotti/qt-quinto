@@ -38,15 +38,14 @@ void Gui::OnClick(QModelIndex index)
 
 void Gui::UpdateLabels(void)
 {
-    //ui->actionsLabel->setText(QString("%1").arg(model->getClickCount()));
-    //ui->whiteLabel->setText(QString("%1").arg(model->getWhiteCount()));
-    //ui->blackLabel->setText(QString("%1").arg(model->getBlackCount()));
+    ui->actionsLabel->setText(QString("%1").arg(model->getClickCount()));
+    ui->whiteLabel->setText(QString("%1").arg(model->getWhiteCount()));
+    ui->blackLabel->setText(QString("%1").arg(model->getBlackCount()));
 }
 
 void Gui::OnNewGame(void)
 {
     model->generate(side, density);
-    ui->actionsLabel->setText("0");
 }
 
 void Gui::OnRetry(void)
