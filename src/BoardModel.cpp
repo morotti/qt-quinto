@@ -33,7 +33,7 @@ long BoardModel::solve(void)
 {
     beginResetModel();
 
-    long nSolution = board.solve();
+    long nSolution = solver.solve(board.getBoard());
 
     endResetModel();
 
@@ -81,10 +81,10 @@ QVariant BoardModel::data(const QModelIndex &index, int role) const
 {
 	if (role == Qt::DisplayRole)
 	{
-        if(board.getSolution(index.column(), index.row()) == false)
-			return QVariant();
-		else
-			return QString("o");
+        if(solver.isSolved() == false)
+            return QVariant();
+        else
+            return solver.get(index.column(), index.row()) ? QString("o") : QVariant();
 	}
 	else if (role == Qt::BackgroundRole)
 	{
@@ -121,7 +121,7 @@ void BoardModel::Ai(void)
 
 	bar->reset();
     bar->setMaximum(board.getSide() - 1);
-    if(board.isSolved() == false)
+    if(solver.isSolved() == false)
 		nSolution = solve();
 
 	if(nSolution == 0)
@@ -131,7 +131,7 @@ void BoardModel::Ai(void)
 	{
         for( long x = 0 ; x < board.getSide() ; x++)
 		{
-            if(board.getSolution(x, y))
+            if(solver.get(x, y))
 			{
 				click(x, y);
 				qApp->processEvents();

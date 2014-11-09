@@ -11,7 +11,7 @@ namespace tut
     test_runner_singleton runner;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     tut::reporter reporter;
     tut::runner.get().set_callback(&reporter);
