@@ -18,8 +18,8 @@ Gui::Gui(QWidget *parent)
 	statusBar()->addPermanentWidget(bar);
 	bar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-    //ui->tableView->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
-    //ui->tableView->verticalHeader()->setResizeMode(QHeaderView::Stretch);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->setModel(model);
 
     connect(model, SIGNAL(UpdateCounters()), this, SLOT(UpdateLabels()));
@@ -34,23 +34,29 @@ Gui::~Gui()
 void Gui::OnClick(QModelIndex index)
 {
     model->click(index.column(), index.row());
+    UpdateLabels();
+
+    if(model->board.isWon())
+        QMessageBox::information(this, "Victory", "You win !");
 }
 
 void Gui::UpdateLabels(void)
 {
-    ui->actionsLabel->setText(QString("%1").arg(model->getClickCount()));
-    ui->whiteLabel->setText(QString("%1").arg(model->getWhiteCount()));
-    ui->blackLabel->setText(QString("%1").arg(model->getBlackCount()));
+    ui->actionsLabel->setText(QString("%1").arg(model->board.getClickCount()));
+    ui->whiteLabel->setText(QString("%1").arg(model->board.getWhiteCount()));
+    ui->blackLabel->setText(QString("%1").arg(model->board.getBlackCount()));
 }
 
 void Gui::OnNewGame(void)
 {
     model->generate(side, density);
+    UpdateLabels();
 }
 
 void Gui::OnRetry(void)
 {
     model->retry();
+    UpdateLabels();
 }
 
 void Gui::OnSolve(void)

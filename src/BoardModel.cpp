@@ -25,7 +25,7 @@ void BoardModel::generate(long nSide, long nDensity)
 
 	lastPoint.x = lastPoint.y = -1;
     board.generate(nSide, nDensity);
-    UpdateCounters();
+    solver.reset();
 
     endResetModel();
 }
@@ -47,6 +47,7 @@ void BoardModel::retry(void)
 
 	lastPoint.x = lastPoint.y = -1;
     board.retry();
+    solver.reset();
 
     endResetModel();
 }
@@ -54,6 +55,8 @@ void BoardModel::retry(void)
 void BoardModel::click(long x, long y)
 {
     board.click(x, y);
+    if(solver.isSolved())
+        solver.flip(x, y);
 
 	QPoint p(lastPoint.x, lastPoint.y);
 	lastPoint.x = x;
@@ -74,8 +77,6 @@ void BoardModel::click(long x, long y)
 		dataChanged(createIndex(y, x + 1), createIndex(y, x + 1));
 
 	dataChanged(createIndex(p.y(), p.x()), createIndex(p.y(), p.x()));
-
-	emit UpdateCounters();
 }
 
 QVariant BoardModel::data(const QModelIndex &index, int role) const

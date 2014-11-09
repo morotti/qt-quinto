@@ -9,21 +9,19 @@ class BoardModel: public QAbstractTableModel
 {
 	Q_OBJECT
 
-private:
+public:
     Board board;
     Solver solver;
 
+private:
 	struct {long x; long y; } lastPoint;
 
 	QVariant blueBrush, whiteBrush, blackBrush;
-	QProgressBar *bar;
-
-signals:
-	void UpdateCounters(void);
+    QProgressBar *bar;
 
 public:
     BoardModel(QObject *parent);
-	QProgressBar *GetProgressBar(void) { return bar; };
+    QProgressBar *GetProgressBar(void) { return bar; };
 
     void click(long x, long y);
     void generate(long nSide, long nDensity);

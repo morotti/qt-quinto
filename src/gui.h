@@ -32,7 +32,7 @@ public slots:
 private:
     Ui::Gui *ui;
 	long density;
-	long side;
+    long side;
     BoardModel *model;
 };
 
