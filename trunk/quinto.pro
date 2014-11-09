@@ -4,12 +4,14 @@ HEADERS += \
     src/board.h \
     src/gui.h \
     src/precompiled.h \
+    src/solver.h \
     src/BoardModel.h
 
 SOURCES += \
     src/board.cpp \
     src/gui.cpp \
     src/main.cpp \
+    src/solver.cpp \
     src/BoardModel.cpp
 
 FORMS += \

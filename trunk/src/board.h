@@ -4,7 +4,6 @@
 #include "precompiled.h"
 
 #include <vector>
-#include <omp.h>
 
 //**************************************************************************//
 // class Board
@@ -21,117 +20,62 @@
 #define OPTIMISATION_SSE 0
 #endif
 
+typedef boost::numeric::ublas::vector<boost::dynamic_bitset<unsigned long long> > Grid2D;
+
 class Board
 {
 private:
     // cote de la grille, densite de points noirs au depart
-    long side, density;
+    size_t side, density;
     
-	long clicks, blacks;
+    size_t clicks, blacks;
 
     // grille de jeu
-    boost::numeric::ublas::vector<boost::dynamic_bitset<unsigned long long> > board;
+    Grid2D board;
     
     // grille de depart
-    boost::numeric::ublas::vector<boost::dynamic_bitset<unsigned long long> > beginning;
+    Grid2D beginning;
     
-    // solution si calculee
-    boost::numeric::ublas::vector<boost::dynamic_bitset<unsigned long long> > solution;
-
     // passe une case dans l'etat value, etat noir par defaut
-    inline void set(long x, long y, bool value = true);
+    void set(size_t x, size_t y, bool value = true);
     
     // passe une case dans l'etat blanc
-    inline void reset(long x, long y);
+    void reset(size_t x, size_t y);
     
     // inverse l'etat d'une case
-    inline void flip(long x, long y);
+    void flip(size_t x, size_t y);
 
-	void count(void);
-
-	QElapsedTimer timer;
-	inline void tic(void) { timer.restart(); }
-	inline void toc(std::string s = "")
-		{ qint64 t = timer.elapsed(); qDebug("Elapsed - %s : %ld", s.c_str(), t); }
-	inline void toctic(std::string s = "") { toc(s); tic(); }
+    void recount(void);
 
 public:
     // constructeur 
     Board(void);
     
     // inverse l'etat de la case et de ses cases voisines
-    inline virtual void click(long x, long y);
+    void click(size_t x, size_t y);
     
     // genere une grille de taille et densite donnee
-    virtual void generate(long nSide, long nDensity);
+    void generate(size_t nSide, size_t nDensity);
     
     // repasse la grille dans sa position de depart
-	virtual void retry(void) { board = beginning; solution.resize(0); count(); }
+    void retry(void) { board = beginning; recount(); }
     
     // verifie si on a gagne
     bool isWon(void);
     
     // renvoie la taille du cote de la grille
-    inline long getSide(void) const { return side; }
+    size_t getSide(void) const { return side; }
     
-	inline bool get(const long x, const long y) const;	
+    bool get(const size_t x, const size_t y) const;
 
-	inline bool isSolved(void) const;
+    size_t getClickCount(void) { return clicks; }
 
-	inline bool getSolution(const long x, const long y) const;
+    size_t getWhiteCount(void) { return side * side - blacks; }
 
-	inline long getClickCount(void) { return clicks; }
-
-	inline long getWhiteCount(void) { return side * side - blacks; }
-
-	inline long getBlackCount(void) { return blacks; }
+    size_t getBlackCount(void) { return blacks; }
 
     // renvoie une copie de la grille
-    //std::vector<std::vector<bool>> getBoard(void);
-
-    // resoud la grille
-    virtual long solve(void);
+    Grid2D getBoard(void) { return board; }
 };
-
-void Board::set(long x, long y, bool value)
-{
-    board[y].set(x, value);
-}
-
-void Board::reset(long x, long y)
-{
-	board[y].reset(x);
-}
-
-void Board::flip(long x, long y)
-{
-	board[y].flip(x);
-	
-	if(board[y].test(x))
-		blacks++;
-	else
-		blacks--;
-}
-
-bool Board::get(const long x, const long y) const
-{
-	return board[y].test(x);
-}
-
-bool Board::isSolved(void) const
-{
-	if(solution.size() > 0)
-		return true;
-	else
-		return false;
-}
-
-bool Board::getSolution(const long x, const long y) const
-{
-	if(isSolved())
-		return solution[y].test(x);
-	else
-		return false;
-}
 
 #endif // BOARD_H

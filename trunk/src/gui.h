@@ -4,7 +4,7 @@
 #include <QtWidgets/QMainWindow>
 
 #include "board.h"
-#include "BoardModel.h"
+#include "boardModel.h"
 
 namespace Ui {
 class Gui;

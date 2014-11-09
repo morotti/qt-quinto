@@ -3,14 +3,17 @@ PRECOMPILED_HEADER = src/precompiled.h
 HEADERS += \
     src/board.h \
     src/precompiled.h \
-    src/BoardModel.h
+    src/BoardModel.h \
+    src/solver.h
 
 SOURCES += \
     src/board.cpp \
     src/BoardModel.cpp \
     tests/tutmain.cpp \
     tests/tuttest.cpp \
-    tests/BoardTest.cpp
+    tests/BoardTest.cpp \
+    tests/SolverTest.cpp \
+    src/solver.cpp
 
 FORMS +=
 
