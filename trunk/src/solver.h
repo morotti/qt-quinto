@@ -17,12 +17,6 @@ private:
     // solution si calculee
     Grid2D solution;
 
-    QElapsedTimer timer;
-    void tic(void) { timer.restart(); }
-    void toc(std::string s = "")
-        { qint64 t = timer.elapsed(); qDebug("Elapsed - %s : %ld", s.c_str(), t); }
-    void toctic(std::string s = "") { toc(s); tic(); }
-
 public:
     bool get(size_t x, size_t y) const;
     void reset(void);

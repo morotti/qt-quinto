@@ -48,16 +48,12 @@ size_t Solver::solve(Grid2D board)
     Grid2D equations;
     boost::dynamic_bitset<unsigned char> result;
 
-    toctic("start");
-
     size_t side = board.size();
     // initialise la 2eme matrice
     result.resize(side * side);
     for(size_t y = 0 ; y < side ; y++)
         for(size_t x = 0 ; x < side ; x++)
             result.set(y * side + x, ! board[y][x]);
-
-    toctic("init result");
 
     // initialise la 1ere matrice
     // qui decrit les relations entre les points
@@ -88,8 +84,6 @@ size_t Solver::solve(Grid2D board)
         if(yMatrix < (side*side - side))
             equations[yMatrix].set(yMatrix + side, true);
     }
-
-    toctic("init relations");
 
     // les matrices representent un systeme d'equations a side * side inconnues
     // resolution par la methode du pivot de gauss
@@ -179,7 +173,6 @@ size_t Solver::solve(Grid2D board)
             }
         }
     }
-    toctic("trianguled matrix");
 
 #if OPTIMISATION_MMX && ! OPTIMISATION_SSE
     _m_empty();
@@ -198,8 +191,6 @@ size_t Solver::solve(Grid2D board)
             equations[j].set(i);
         }
     }
-    toctic("transposed matrix");
-
 
     // 2eme boucle, diagonalise la matrice
     for(size_t xMatrix = side * side -1 ;
@@ -226,7 +217,6 @@ size_t Solver::solve(Grid2D board)
             result.flip(yMatrix);
         }
     }
-    toctic("solved");
 
     solution.resize(side);
     for(size_t y = 0 ; y < side ; y++)
@@ -238,8 +228,6 @@ size_t Solver::solve(Grid2D board)
             solution[y].set(x, result[y * side + x]);
         }
     }
-    toctic("copied solution");
 
-    toctic("end");
     return nbSolution;
 }
