@@ -29,6 +29,7 @@ INCLUDEPATH += src
 QMAKE_CXXFLAGS += -openmp
 
 TARGET = tests
+unix:TARGET = tests.bin
 
 #----------
 CONFIG(release, debug|release) {
