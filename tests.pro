@@ -62,7 +62,9 @@ unix {
     OUT_EXE = $${OUT_DIR}/$${TARGET}
 
     QMAKE_POST_LINK += mkdir -p $${OUT_DIR}
+    QMAKE_POST_LINK += &&
     QMAKE_POST_LINK += cp -f $${IN_EXE} $${OUT_EXE}
+    QMAKE_POST_LINK += &&
     QMAKE_POST_LINK += $${OUT_EXE}
 }
 
