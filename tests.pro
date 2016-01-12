@@ -21,8 +21,9 @@ RESOURCES +=
 
 QT += widgets
 
-INCLUDEPATH += C:\boost_1_56_0
-INCLUDEPATH += C:\tut-framework-2013-12-18\include
+win32:INCLUDEPATH += C:\boost_1_56_0
+win32:INCLUDEPATH += C:\tut-framework-2013-12-18\include
+unix:INCLUDEPATH  += lib/tut/include
 INCLUDEPATH += src
 
 QMAKE_CXXFLAGS += -openmp
@@ -37,6 +38,10 @@ CONFIG(release, debug|release) {
 }
 
 #----------
+unix-g++ {
+    COMPILER = g++
+}
+
 win32-msvc2012 {
     COMPILER = msvc2012
 }
@@ -50,6 +55,17 @@ win32-g++ {
 }
 
 #----------
+unix {
+    IN_EXE = $${OUT_PWD}/$${SUBDIR}/$${TARGET}
+
+    OUT_DIR = $${IN_PWD}/bin/unix-$${QT_ARCH}-$${COMPILER}-$${SUBDIR}
+    OUT_EXE = $${OUT_DIR}/$${TARGET}
+
+    QMAKE_POST_LINK = mkdir -p $${OUT_DIR}
+    QMAKE_POST_LINK = cp -f $${IN_EXE} $${OUT_EXE}
+    QMAKE_POST_LINK = $${OUT_EXE}
+}
+
 win32 {
     IN_EXE = $${OUT_PWD}\\$${SUBDIR}\\$${TARGET}.exe
     IN_EXE ~= s,/,\\,g
