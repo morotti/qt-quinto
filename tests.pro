@@ -27,6 +27,7 @@ unix:INCLUDEPATH  += lib/tut/include
 INCLUDEPATH += src
 
 QMAKE_CXXFLAGS += -openmp
+unix:QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
 
 TARGET = tests
 unix:TARGET = tests.bin
