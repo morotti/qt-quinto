@@ -17,4 +17,4 @@ before_install:
 
 script:
     - qmake -qt=qt5 -spec linux-g++ $PROJECT
-    - make -I./lib/tut/include --always-make -f Makefile all
+    - make --always-make -f Makefile all
