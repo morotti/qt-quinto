@@ -38,7 +38,7 @@ CONFIG(release, debug|release) {
 }
 
 #----------
-unix-g++ {
+linux-g++ {
     COMPILER = g++
 }
 
@@ -56,7 +56,7 @@ win32-g++ {
 
 #----------
 unix {
-    IN_EXE = $${OUT_PWD}/$${SUBDIR}/$${TARGET}
+    IN_EXE = $${OUT_PWD}/$${TARGET}
 
     OUT_DIR = $${IN_PWD}/bin/unix-$${QT_ARCH}-$${COMPILER}-$${SUBDIR}
     OUT_EXE = $${OUT_DIR}/$${TARGET}
