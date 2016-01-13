@@ -71,9 +71,7 @@ unix {
     QMAKE_POST_LINK += &&
     QMAKE_POST_LINK += $${IN_EXE}
     QMAKE_POST_LINK += &&
-    QMAKE_POST_LINK += lcov --directory . --capture --output-file coverage.info
-    QMAKE_POST_LINK += &&
-    QMAKE_POST_LINK += lcov --remove coverage.info '/usr/*' --output-file coverage.info
+    QMAKE_POST_LINK += lcov --no-external --directory . --capture --output-file coverage.info
     QMAKE_POST_LINK += &&
     QMAKE_POST_LINK += coveralls-lcov coverage.info
 }
