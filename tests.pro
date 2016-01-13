@@ -75,7 +75,7 @@ unix {
     QMAKE_POST_LINK += &&
     QMAKE_POST_LINK += lcov --remove coverage.info '/usr/*' --output-file coverage.info
     QMAKE_POST_LINK += &&
-    QMAKE_POST_LINK += coveralls-lcov --repo-token $${COVERALLS_TOKEN} coverage.info
+    QMAKE_POST_LINK += coveralls-lcov --repo-token="$${COVERALLS_TOKEN}" coverage.info
 }
 
 win32 {
