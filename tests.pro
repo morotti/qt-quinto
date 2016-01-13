@@ -71,7 +71,7 @@ unix {
     QMAKE_POST_LINK += &&
     QMAKE_POST_LINK += $${IN_EXE}
     QMAKE_POST_LINK += &&
-    QMAKE_POST_LINK += coveralls --exclude lib --gcov-options '\\-lp'
+    QMAKE_POST_LINK += coveralls --exclude lib --gcov-options \\-lp
 }
 
 win32 {
