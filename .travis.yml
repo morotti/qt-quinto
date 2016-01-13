@@ -18,6 +18,5 @@ before_install:
     - svn export https://github.com/mrzechonek/tut-framework/trunk/include lib/tut/include
 
 script:
-    - export COVERALLS_TOKEN=$COVERALLS_TOKEN
     - qmake -qt=qt5 -spec linux-g++ $PROJECT
     - make --always-make -f Makefile all
