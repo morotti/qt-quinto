@@ -14,11 +14,9 @@ before_install:
     - sudo apt-get install -qq qt5-qmake qtbase5-dev qttools5-dev-tools qtdeclarative5-dev
     - sudo apt-get install -qq libboost-dev
     - gem install coveralls-lcov
-    - svn export https://github.com/mrzechonek/tut-framework/trunk/include lib/tut/include
-    - svn export https://github.com/linux-test-project/lcov/tags/v1.12 gcovinstaller
-    - cd gcovinstaller
-    - sudo make install
-    - cd ..
+    - svn export https://github.com/mrzechonek/tut-framework/trunk/include $HOME/lib/tut/include
+    - svn export https://github.com/linux-test-project/lcov/tags/v1.12 $HOME/gcovinstaller
+    - sudo make -C $HOME/gcovinstaller install
 
 script:
     - qmake -qt=qt5 -spec linux-g++ $PROJECT

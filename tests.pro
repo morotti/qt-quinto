@@ -23,7 +23,7 @@ QT += widgets
 
 win32:INCLUDEPATH += C:\boost_1_56_0
 win32:INCLUDEPATH += C:\tut-framework-2013-12-18\include
-unix:INCLUDEPATH  += lib/tut/include
+unix:INCLUDEPATH  += $${HOME}/lib/tut/include
 INCLUDEPATH += src
 
 QMAKE_CXXFLAGS += -openmp
