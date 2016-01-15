@@ -80,7 +80,7 @@ win32 {
     IN_EXE = $${OUT_PWD}\\$${SUBDIR}\\$${TARGET}.exe
     IN_EXE ~= s,/,\\,g
 
-    OUT_DIR = $${IN_PWD}\\bin\\win-$${QT_ARCH}-$${COMPILER}-$${SUBDIR}
+    OUT_DIR = $${IN_PWD}\\bin\\$${QMAKE_PLATFORM}-$${QT_ARCH}-qt$${QT_MAJOR_VERSION}.$${QT_MINOR_VERSION}-$${COMPILER}-$${SUBDIR}
     OUT_EXE = $${OUT_DIR}\\$${TARGET}.exe
     OUT_DIR ~= s,/,\\,g
     OUT_EXE ~= s,/,\\,g
@@ -88,4 +88,8 @@ win32 {
     QMAKE_POST_LINK += (if not exist $${OUT_DIR} ( mkdir $${OUT_DIR} ))
     QMAKE_POST_LINK += &&
     QMAKE_POST_LINK += copy /Y $${IN_EXE} $${OUT_EXE}
+    QMAKE_POST_LINK += &&
+    QMAKE_POST_LINK += $${IN_EXE}
+    QMAKE_POST_LINK += &&
+    QMAKE_POST_LINK += windeployqt --force --no-webkit2 --no-system-d3d-compiler --no-translations --no-quick-import $${OUT_EXE}
 }
