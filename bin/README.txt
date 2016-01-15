@@ -1,0 +1,1 @@
+Always keep this file here. Git goes crazy when a folder is empty.
