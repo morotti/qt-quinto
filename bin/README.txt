@@ -1,1 +1,1 @@
-Always keep this file here. Git goes crazy when a folder is empty.
+/!\ Always keep (at least) this file here. Git will go crazy if this folder is empty. /!\
