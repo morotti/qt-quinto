@@ -38,7 +38,7 @@ Given the side of the board is n. The solver complexity is n^4 in memory and n^4
 * Boost:UBLAS for memory saving (binary variables stored as single bits rather than entire bytes)
 * Qt-related optimizations for faster visual rendering (find hotspots using the visual studio ultimate profiler)
 
-The current version can solve a 300x300 board (90000x90000 equations aka 8.1 BILLION elements matrix) in less than 1 minute and 1 GB memory, then display in real time the animation before your eyes.
+The current version can solve a 300x300 board (90000x90000 equations aka 8.1 BILLION elements matrix) in less than 1 minute and 1 GB memory, then display the animation before your eyes.
 
 ## Tools
 ### Build
@@ -52,16 +52,19 @@ The installer is available in /bin/
 
 ### Unit Testing
 The project has a bunch of unit tests running on the TUT framework (a simple cross-platform & header-only unit test framework).
-Qt can only make a single executable per project so there is a separeted tests.pro project for tests.
+
+Qt can only make a single executable per project so there is a separate project "tests.pro" for unit tests.
 
 ### Code Coverage
-Code coverage is analyzed using gcov/lcov on linux. (requires linux-gcc and lcov version >= 1.12)
+Code coverage is analyzed using gcov on linux. Coverage report is sent to coveralls upon completion.
+
+gcov requires gcc (linux only) and lcov version >= 1.12
 
 ### Continuous Integration
 #### Travis-CI (through github)
 * Build under linux | gcc
 * 64 bits only
-* Run unit tests (with coverate)
+* Run unit tests (with coverage)
 * Upload coverage report to coveralls
 
 #### Teamcity (personal local server)
