@@ -8,10 +8,8 @@ os:
     - linux
 
 env:
-    - PROJECT=quinto.pro  BUILDFILE=Makefile.Debug
-    - PROJECT=quinto.pro  BUILDFILE=Makefile.Release
-    - PROJECT=tests.pro   BUILDFILE=Makefile.Debug
-    - PROJECT=tests.pro   BUILDFILE=Makefile.Release
+    - PROJECT=quinto.pro
+    - PROJECT=tests.pro
 
 before_install:
     - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
@@ -25,4 +23,4 @@ before_install:
 
 script:
     - qmake -qt=qt5 -spec linux-g++ $PROJECT
-    - make --always-make -f $BUILDFILE
+    - make --always-make -f Makefile all
