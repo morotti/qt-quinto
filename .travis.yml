@@ -3,13 +3,15 @@ notifications:
   
 language: cpp
 compiler:
-    - make
+    - g++
 os:
     - linux
 
 env:
-    - PROJECT=quinto.pro
-    - PROJECT=tests.pro
+    - PROJECT=quinto.pro  BUILDSPEC=debug-all
+    - PROJECT=quinto.pro  BUILDSPEC=release-all
+    - PROJECT=tests.pro   BUILDSPEC=debug-all
+    - PROJECT=tests.pro   BUILDSPEC=release-all
 
 before_install:
     - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
@@ -23,4 +25,4 @@ before_install:
 
 script:
     - qmake -qt=qt5 -spec linux-g++ $PROJECT
-    - make --always-make -f Makefile all
+    - make --always-make -f Makefile $BUILDSPEC
